@@ -34,18 +34,50 @@ business_entity_resolution/
 └── README.md                # This file
 ```
 
-## Installation
+## Quick Start
 
-1. **Create a virtual environment (recommended)**:
+1. **Verify data files exist**:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   python verify_data.py
    ```
+   
+   If this fails, see `DATA_SETUP.md` for troubleshooting.
 
 2. **Install dependencies**:
    ```bash
+   # Create virtual environment (recommended)
+   python -m venv venv
+   
+   # Activate it
+   # On Windows:
+   venv\Scripts\activate
+   # On Linux/Mac:
+   source venv/bin/activate
+   
+   # Install packages
    pip install -r requirements.txt
    ```
+
+3. **Run complete pipeline** (training + inference):
+   ```bash
+   python run_complete_pipeline.py
+   ```
+   
+   This will:
+   - Train model on training data
+   - Generate predictions on test data
+   - Create output files in `output/` directory
+
+4. **Validate outputs**:
+   ```bash
+   cd ../../student_resource
+   python utils/validate_submission.py ^
+     --matching ../code/business_entity_resolution/output/matching_results.tsv ^
+     --candidate ../code/business_entity_resolution/output/candidate_pairs.tsv ^
+     --test-dir dataset/test
+   ```
+
+## Installation
 
 ## Usage
 
